@@ -1,0 +1,98 @@
+Announcement
+============
+
+BFLib 0.1 -- a library of certified Agda programs for arithmetic of
+             binary integer numbers and generic fractions
+	      
+is available on 
+
+   http://www.botik.ru/pub/local/Mechveliani/bfLib/,
+   ftp://ftp.botik.ru/pub/local/Mechveliani/bfLib/,
+   https://github.com/mechvel/BFLib-0.1
+
+Author:  Sergei D. Meshveliani.
+
+Acknowledgement:
+  --------------------------------------------------------------------
+  this library has been designed under a full support of 
+  Ailamazyan Program systems institute of Russian Academy of sciences.
+  --------------------------------------------------------------------
+
+BFLib-0.1  is a pure, regular-performance, complete, and certified 
+           binary arithmetic for  integer numbers,  and the arithmetic
+           of  fractions  in the general case of fractions over an
+	   arbitrary GCDRing.
+
+It has been tested under  Agda 2.6.0, MAlonzo, ghc-8.6.3.
+
+It is suggested as a replacement (with possible changes) for the  Bin and
+Rational parts  in  Standard library lib-1.0.
+
+BFLib suggests the three improvements.
+(I) Essentially faster implementation for `<-cmp', show, gcd for Nat,
+    and for arithmetic of rational numbers.
+(II)  New Bin part.
+(III) Generic Fraction domain constructor. 
+
+The Bin part of the library improves the Standard library in three ways.
+* It has many operations and proofs that are important and necessary and
+  are missed in standard.
+* Its arithmetic has a reasonable cost order when the proof parts are not
+  inspected, and the inequality resolution, and some other operations, have
+  a reasonable cost order even when the proof parts are inspected.
+
+The Fraction part of the library improves the standard library in that
+fractions are considered not only over integer numbers, but over an
+arbitrary GCDRing. So that the domain Rational is expressed as
+(Fraction Integer). And many other kinds of fractions become possible to
+operate with, for example, fractions of multivariate polynomials.
+In particular, the domain  BRational = Fraction BInteger  provides arithmetic
+for rational numbers which parts are represented in binary system,
+which arithmetic has a low cost order.
+
+Relation to Standard library lib-1.0
+------------------------------------
+* The Bin part is completely replaced.
+* The classical generic algebra structure hierarhy  (Setoid, Magma, ...,
+  CommutativeRing) is taken of  standard library.
+  And for the Fraction part, there are added the following items.
+a) DecIntegralRing (a commutative ring without zero divisors and with a
+   decidable division),  GCDRing -- a DecIntegralRing which provides the gcd
+   operation.
+b) A general definition of  primality  and  greatest common divisor.
+
+Concerning the Bin part:
+------------------------
+the binary representation for natural numbers is by the constructors:
+0#, 2suc, suc2* (zero, any even, any odd).
+It follows the respresentation that was shown in 2016 in the library by 
+Martin Escardo of 2016:
+       http://www.cs.bham.ac.uk/~mhe/agda-new/BinaryNaturals.html
+
+Software base 
+=============
+
+BFLib-0.1  has been tested under  Agda 2.6.0, MAlozo, ghc-8.6.3
+(it would not work for earlier versions).
+
+Installation:
+              agda -c $agdaLibOpt TypeCheckAll.agda
+              agda -c $agdaLibOpt Bin/GCDTest.agda
+	      agda -c $agdaLibOpt Fraction/BRationalTest.agda
+
+Performance tests:
+  Bin/DivModTest.agda, Bin/GCDTest.agda, Bin/LogarithmTest.agda,
+  Fractions/BRationalTest.agda, Fractions/RationalTest.agda.
+  ("readme"-s are included). 
+
+Memory requirement
+------------------
+Type checking BFLib needs at list  900 Mb RAM.
+This also suffices to compile it via the MAlonzo tool.
+To work with BFLib it is desirable to have at least 4 Gb computer. 
+
+Comments and improvements are welcome.
+
+---------------------
+Sergei D. Meshveliani
+mechvel@botik.ru
